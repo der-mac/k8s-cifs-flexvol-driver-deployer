@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: flexvol-setup
+  namespace: driver-deploy
+spec:
+  selector:
+    matchLabels:
+      app: flexvol-setup
+  template:
+    metadata:
+      name: flexvol-setup
+      labels:
+        app: flexvol-setup
+    spec:
+      containers:
+        - image: dermac/k8s-cifs-flexvol-driver-deployer:latest
+          name: flexvol-setup
+          securityContext:
+              privileged: true
+          volumeMounts:
+            - mountPath: /flexmnt
+              name: flexvolume-mount
+      volumes:
+        - name: flexvolume-mount
+          hostPath:
+            path: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
