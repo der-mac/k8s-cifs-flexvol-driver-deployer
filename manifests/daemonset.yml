@@ -14,7 +14,7 @@ spec:
         app: flexvol-setup
     spec:
       containers:
-        - image: dermac/k8s-cifs-flexvol-driver-deployer:latest
+        - image: quay.io/dermac/k8s-cifs-flexvol-driver-deployer:latest
           name: flexvol-setup
           securityContext:
               privileged: true
